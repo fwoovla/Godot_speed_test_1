@@ -1,0 +1,296 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://manBlue_stand.png" type="Texture" id=1]
+[ext_resource path="res://hitman1_gun.png" type="Texture" id=2]
+[ext_resource path="res://womanGreen_stand.png" type="Texture" id=3]
+[ext_resource path="res://gunner.gd" type="Script" id=4]
+[ext_resource path="res://Game.gd" type="Script" id=5]
+[ext_resource path="res://Game_over_panel.gd" type="Script" id=6]
+[ext_resource path="res://Untitled.png" type="Texture" id=7]
+[ext_resource path="res://doll.gd" type="Script" id=8]
+[ext_resource path="res://player.gd" type="Script" id=9]
+[ext_resource path="res://icon.png" type="Texture" id=10]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 60.7614, 304.157 )
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 21.22
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 1158.01
+
+[sub_resource type="Animation" id=3]
+resource_name = "New Anim"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.1 ), Vector2( 0.3, 0.3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "New Anim"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.1 ), Vector2( 0.3, 0.3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1021.0
+margin_bottom = 595.0
+color = Color( 0.109804, 0.447059, 0.0313726, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+margin_left = 900.0
+margin_top = 6.0
+margin_right = 1024.0
+margin_bottom = 606.0
+color = Color( 0.890196, 0.478431, 0.176471, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="ColorRect/ColorRect"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/ColorRect/Area2D"]
+position = Vector2( 60.0678, 300.339 )
+shape = SubResource( 5 )
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect"]
+margin_left = -4.0
+margin_top = 2.0
+margin_right = 120.0
+margin_bottom = 602.0
+color = Color( 0.12549, 0.509804, 0.658824, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="doll" type="Sprite" parent="."]
+position = Vector2( 995, 269 )
+texture = ExtResource( 3 )
+script = ExtResource( 8 )
+
+[node name="Tween" type="Tween" parent="doll"]
+
+[node name="player" type="KinematicBody2D" parent="." groups=[
+"player",
+]]
+position = Vector2( 40.8125, 290.701 )
+script = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="player"]
+texture = ExtResource( 1 )
+
+[node name="green_timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="red_timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="start_timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="green_timer_label" type="Label" parent="."]
+margin_left = 440.007
+margin_top = 26.1625
+margin_right = 480.007
+margin_bottom = 40.1625
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gunners" type="Node2D" parent="."]
+
+[node name="gunner" type="Sprite" parent="gunners"]
+position = Vector2( 911, 38 )
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="RayCast2D" type="RayCast2D" parent="gunners/gunner"]
+position = Vector2( 1, -1 )
+cast_to = Vector2( 1000, 0 )
+
+[node name="Area2D" type="Area2D" parent="gunners/gunner"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gunners/gunner/Area2D"]
+shape = SubResource( 2 )
+
+[node name="flash" type="Sprite" parent="gunners/gunner"]
+visible = false
+position = Vector2( 34.9229, 4.76221 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="gunners/gunner/flash"]
+"anims/New Anim" = SubResource( 3 )
+
+[node name="gunner2" type="Sprite" parent="gunners"]
+position = Vector2( 644.684, 534.085 )
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="RayCast2D" type="RayCast2D" parent="gunners/gunner2"]
+position = Vector2( 1, -1 )
+cast_to = Vector2( 1000, 0 )
+
+[node name="Area2D" type="Area2D" parent="gunners/gunner2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gunners/gunner2/Area2D"]
+shape = SubResource( 2 )
+
+[node name="flash" type="Sprite" parent="gunners/gunner2"]
+visible = false
+position = Vector2( 34.9229, 4.76221 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="gunners/gunner2/flash"]
+"anims/New Anim" = SubResource( 4 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 244.697, 177.349 )
+scale = Vector2( 2, 2 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+texture = ExtResource( 10 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( 374.902, 389.494 )
+scale = Vector2( 2, 2 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D2"]
+texture = ExtResource( 10 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2( 501.74, 165.002 )
+scale = Vector2( 2, 2 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D3"]
+texture = ExtResource( 10 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D3"]
+polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2( 726.233, 59.4905 )
+scale = Vector2( 2, 2 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D4"]
+texture = ExtResource( 10 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D4"]
+polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2( 683.237, 415.287 )
+scale = Vector2( 2, 2 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D5"]
+texture = ExtResource( 10 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D5"]
+polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+
+[node name="Game_over_panel" type="Panel" parent="."]
+visible = false
+margin_left = 180.759
+margin_top = 85.6229
+margin_right = 791.759
+margin_bottom = 451.623
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Game_over_panel"]
+margin_left = 294.923
+margin_top = 140.326
+margin_right = 334.923
+margin_bottom = 154.326
+text = "Game OVer
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="play_again" type="Button" parent="Game_over_panel"]
+margin_left = 268.761
+margin_top = 42.8115
+margin_right = 280.761
+margin_bottom = 62.8115
+text = "play again"
+
+[node name="quit_button" type="Button" parent="Game_over_panel"]
+margin_left = 256.869
+margin_top = 97.515
+margin_right = 350.869
+margin_bottom = 117.515
+text = "exit to menu"
+
+[node name="green_position" type="Position2D" parent="."]
+position = Vector2( 1074, 268 )
+
+[connection signal="body_entered" from="ColorRect/ColorRect/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="green_timer" to="." method="_on_green_timer_timeout"]
+[connection signal="timeout" from="red_timer" to="." method="_on_red_timer_timeout"]
+[connection signal="timeout" from="start_timer" to="." method="_on_start_timer_timeout"]
+[connection signal="body_entered" from="gunners/gunner/Area2D" to="gunners/gunner" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="gunners/gunner2/Area2D" to="gunners/gunner2" method="_on_Area2D_body_entered"]
+[connection signal="pressed" from="Game_over_panel/play_again" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="Game_over_panel/quit_button" to="." method="_on_quit_button_pressed"]
